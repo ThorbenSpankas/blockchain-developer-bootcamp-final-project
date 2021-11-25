@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Register information at Blockchain</title>
+
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <script src="./index.js"></script>    
+  </head>
+
+  <body class="container">
+
+    <h1 class="page-header">Super Casino</h1>
+
+    <a href="#" onclick="registerConnect()" class="btn btn-primary">Connect Metamask</a>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Mach deinen Put Bet!</h3>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <table>
+              <tr>
+                <td><label for="PBA">Put Bet Amount</label> </td>
+                <td>
+                  <input class="form-control" id="PBA">
+                </td>                          
+              </tr>
+              <td><label for="PBCA">Put Bet CounterAmount</label> </td>
+                <td>
+                  <input class="form-control" id="PBCA">
+                </td>                          
+              </tr>
+            </tr>
+            <td><label for="PPG">Put Price Guess</label> </td>
+              <td>
+                <input class="form-control" id="PPG">
+              </td>                          
+            </tr>
+            </table>
+          </div>
+          <a href="#" onclick="placeBet(PBA, PBCA, PPG)" class="btn btn-primary">Einsetzen</a>
+        </form>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Was ist der Bet?</h3>
+        <form class="form-inline" role="form">
+          <a href="#" onclick="registerGetInfo()" class="btn btn-primary">Los</a>
+          <div class="form-group">
+            <table>
+              <tr>
+                <td>Info:</td>
+                <td>
+                  <label id="lastInfo">
+                </td>                          
+              </tr>
+            </table>
+          </div>                
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Nimm die Wette an!</h3>
+        <form class="form-inline" role="form">
+          <a href="#" onclick="registerTakeBet()" class="btn btn-primary">Los</a>             
+        </form>
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <h3 class="sub-header">Frage nach wer gewonnen hat</h3>
+        <form class="form-inline" role="form">
+          <a href="#" onclick="registerResolveBet()" class="btn btn-primary">Los</a>             
+        </form>
+      </div>
+    </div>
+
+  </body>
+</html>
