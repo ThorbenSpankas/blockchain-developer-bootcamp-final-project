@@ -45,8 +45,8 @@ event Received(address, uint);
 
 
 // 
-// someone should be able to place a bet with ethereum on wether ethereum eur exchange rate 
-// will be equal above or below a certain level in 10 blocks time
+// someone should be able to place a bet with ethereum on whether ethereum usd exchange rate 
+// will be equal above or below a certain level in x minutes
 
     function placeBet(uint _betAmount, uint _betAmountCounter ,uint _priceGuess) external payable returns (uint){
         getLatestPrice();
@@ -69,34 +69,6 @@ event Received(address, uint);
         bet_put = msg.sender;
         price_when_placed = getLatestPrice();
         start = block.timestamp;
-       // return (start);
-       // price_when_placed = price;
-    }
-
-// someone else can take this bet until 5 blocks after it has been placed
-
-// 44 blocks are more or less 10 min, lets make it so bets have to be taken 5 min after latest. After 10 min or 44 blocks we more or less resolve using gelato?
-// so fragt man nach zeit
-// kann das dann einfach so gemacht werden fürs wette platzieren?
-// und nur das resolven alle so und so viel minuten? 
-// wie checkt gelato dann die richtigen intervalle?
-// in dem man sagt es muss auch eine flagge auf wahr setzen die sagt jetzt darf gewettet werden?
-
-// so funktionieren timer
-// solange das hier drunter ausgeführt wird kann man wissen ob noch zeit da ist
-// also vllt einfach n require oder modifier für takebet der sagt
-// wenn die bedingung erfüllt ist los gehts?
-// und dann in takebet letsgo auf false setzt für neustart?
-    function f() public {
-        if (block.timestamp <= start + 1 * 1 minutes) {
-        letsgo = true;
-        } else {
-        letsgo = false;}
-    }
-
-    function ff() public {
-    letsgo = false;
-    start = block.timestamp;
     }
 
     function takeBet() external payable {
@@ -104,6 +76,7 @@ event Received(address, uint);
         // require bet is placed
         // only possible to take bet until 15 min before resolving
         require(block.timestamp <= start + 1 * 1 minutes);
+        require(betActive);
 
 
         uint conv = 10**18;
@@ -114,23 +87,19 @@ event Received(address, uint);
         pricePool += betAmount;
     }
 
-// to make it even more complicated, we set the payment of price money random
-// the winner of the bet minimum gets 50% of the price pool and maximum 100%
-// the other half goes to the player that accepted the bet
-// from this execrcise it becomes obvious why random numbers should not be generated on chain
-// https://ethernaut.openzeppelin.com/level/0x4dF32584890A0026e56f7535d0f2C6486753624f
-// there for another chainlink oracle will get used to receive a random number
-// also this means we need a function that pays out Ether to whoever won the bet or when a bet wasnt taken by anybody
-
-    
-// lets change the system and use Gelato to automatically execute this function after 30 min. 
     function resolveBet() public payable {
-
+         price_now = getLatestPrice();
         // only possible 30 -35 min after bet got placed
         // the money will become part of the next bet if noone claims price
+        require(betActive);
         require(block.timestamp <= start + 3 * 1 minutes);
         require(block.timestamp >= start + 2 * 1 minutes);
         
+        if(priceGuess >= price_now){
+            bet_winner = bet_put;
+        } else {
+            bet_winner = bet_take;
+            }
         // get some if condition here to check which price it is
         // if priceGuess >= truePrice
         // bet_winner = bet_put
@@ -143,16 +112,14 @@ event Received(address, uint);
         // or are two seperate functions for both prices better?
         
         // where do I want to check who won the bet?
-        uint  price = pricePool * shareOfPool;
+        uint  price = pricePool *10**18;
         (bool sent, bytes memory data) = bet_winner.call{value: price}("");
         require(sent, "Failed to send Ether");
         
-        uint  price_rest = pricePool * restofPool;
-        (bool sent_rest, bytes memory data_rest) = not_bet_winner.call{value: price_rest}("");
-        require(sent_rest, "Failed to send Ether");
+       
 
         
-        price_last_time = getLatestPrice();
+        //price_last_time = getLatestPrice();
     }
 
 
