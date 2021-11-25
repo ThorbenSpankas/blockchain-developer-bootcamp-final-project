@@ -46,7 +46,7 @@ event Received(address, uint);
 
 // 
 // someone should be able to place a bet with ethereum on whether ethereum usd exchange rate 
-// will be equal above or below a certain level in x minutes
+// will be equal above or below a certain level in 2 minutes
 
     function placeBet(uint _betAmount, uint _betAmountCounter ,uint _priceGuess) external payable returns (uint){
         getLatestPrice();
@@ -73,12 +73,9 @@ event Received(address, uint);
 
     function takeBet() external payable {
         // only possible to take bet if bet is placed
-        // require bet is placed
+        require(betActive);
         // only possible to take bet until 15 min before resolving
         require(block.timestamp <= start + 1 * 1 minutes);
-        require(betActive);
-
-
         uint conv = 10**18;
         require(msg.value == betAmountCounter * conv);
         (bool sent, bytes memory data) = payable(address(this)).call{value: betAmountCounter}("");
@@ -89,7 +86,7 @@ event Received(address, uint);
 
     function resolveBet() public payable {
          price_now = getLatestPrice();
-        // only possible 30 -35 min after bet got placed
+        // only possible in vertain time frame after bet got placed
         // the money will become part of the next bet if noone claims price
         require(betActive);
         require(block.timestamp <= start + 3 * 1 minutes);
@@ -100,38 +97,12 @@ event Received(address, uint);
         } else {
             bet_winner = bet_take;
             }
-        // get some if condition here to check which price it is
-        // if priceGuess >= truePrice
-        // bet_winner = bet_put
-        // not_bet_winner = bet_take
-        // else the other way around
-        
-        // some checks to see if person calling is allowed to receive the Ether
-        
-        // do I want to have two transactions here for both players
-        // or are two seperate functions for both prices better?
-        
-        // where do I want to check who won the bet?
         uint  price = pricePool *10**18;
         (bool sent, bytes memory data) = bet_winner.call{value: price}("");
         require(sent, "Failed to send Ether");
-        
-       
-
-        
-        //price_last_time = getLatestPrice();
     }
 
-
-// so with this project we can see if I understand
-
-// transfering to contracts and getting money out of them again
-// how math works in solidity when floats dont exists (for calculating the payments)
-// how to figure out which block is current 
-// receive the current quote of an event for a specific block (if this is possible?)
-// receive a random number from which the payment share will be determined
-
-// allow contract to get ethernautreceive() external payable {
+// allow contract to get Eth
     receive() external payable {
        emit Received(msg.sender, msg.value);
     }
