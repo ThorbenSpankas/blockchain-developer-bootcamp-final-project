@@ -20,7 +20,6 @@ contract GamblingProblem is PriceOrakle {
 address public bet_put;
 address public bet_take;
 address public bet_winner;
-address public not_bet_winner;
 
 // Uints
 uint public betAmount;
