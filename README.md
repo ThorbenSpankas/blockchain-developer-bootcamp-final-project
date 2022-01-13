@@ -1,14 +1,43 @@
-# blockchain-developer-bootcamp-final-project
-Blockchain Developer Bootcamp 2021 by Consensys
+# Blockchain Developer Bootcamp Final Project
 
+## Project description
+A little script to place Bets on the future Ethereum USD Price. A bet placer can make a bet if ETH will be higher or equal a set price in the next 2-3 minutes.
+The player sets a Bet Amount and how much the counter party has to bet.
+When the Bet is placed another player can accept and take the counter bet. This has to be done in 1 minute after the bet was placed.
 
-Betting on Eth USD Price. 
+From 2-3 min after the bet has been placed, the bet can be resolved and the winner receives the price pool.
 
-With this contract people can place customizable bets on the future price of Eth in USD. 
+If a bet has not been taken or resolved, the price pool adds to the next betting round.
 
-Someone can place a bet, set the acceptable value of the Counter Bet and make a guess if the price of ETH will exceed a certain threshold in the next x minutes.
+## Directory Structure
 
-During a fixed time period someone can accept that bet and transfer the requested amount to the contract.
+| Folder        | Contents                                                                          |
+|---            |---                                                                                |
+| contracts     | Smart contract as deployed on the Rinkeby testnet                                   |
+| docs          | Project documentation for deployed address, security and design patterns          |
+| frontend      | Front-end client application to interact with the deployed smart contract         |
+| migrations    | Migration scripts for deploying the smart contracts in the contracts directory    |
+| test          | Unit tests for validating the smart contract                                      |
 
-At expiration both parties can run a function that resolves the bet for a certain time frame. The winner receives all funds in the contract.
-If noone claims the win during the allowed time window, the Eth will become part of the price pool for the next bet.
+## Public Ethereum Address for Certification
+`0x66f210b57fffb5bC75c5eBBa12C346E891Ca6b8c`
+
+## Dependencies
+- dotenv
+- web3
+- @chainlink/contracts
+- truffle/hdwallet-provider
+
+Install dependencies using:<br/>
+`npm install`
+
+## Starting the client application
+Open the project in VSCode and use the Live Server plugin to open ./frontend/index.html in the browser.
+
+## Running Smart Contract tests
+run `truffle test --network rinkeby`
+
+## Deployed Address
+https://thorbenspankas.github.io/
+
+## Screencast

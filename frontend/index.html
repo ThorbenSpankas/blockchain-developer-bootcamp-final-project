@@ -1,86 +1,88 @@
 <!DOCTYPE html>
-<html >
-  <head>
-    <title>Register information at Blockchain</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gambling Problems</title>
+    <link rel="stylesheet" href="basic.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="./node_modules/web3/dist/web3.min.js"></script>
-    <script src="./index.js"></script>    
-  </head>
+    <style>
+		main,footer {
+			margin: 0 auto;
+			width: 60%;
+			text-align: left;
+			padding: 0 20px;
+		}
 
-  <body class="container">
+		section>section {
+			color: #fff;
+			background-color: var(--c1);
+			padding: 15px;
+			margin: 10px 8px 10px 8px;
+			text-align: center;
+		}
 
-    <h1 class="page-header">Super Casino</h1>
+		@media (max-width: 481px) {
+			body {font-size: 18px}
+			main,footer {width: 98%}
+			section,article {flex:none; width:100%; margin-left: 0;}
+		}
+	</style>
 
-    <a href="#" onclick="registerConnect()" class="btn btn-primary">Connect Metamask</a>
+</head>
+<body>
+    <main>
+    <h1>Gambling</h1>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Mach deinen Put Bet!</h3>
-        <form class="form-inline" role="form">
-          <div class="form-group">
-            <table>
-              <tr>
-                <td><label for="PBA">Put Bet Amount</label> </td>
-                <td>
-                  <input class="form-control" id="PBA">
-                </td>                          
-              </tr>
-              <td><label for="PBCA">Put Bet CounterAmount</label> </td>
-                <td>
-                  <input class="form-control" id="PBCA">
-                </td>                          
-              </tr>
-            </tr>
-            <td><label for="PPG">Put Price Guess</label> </td>
-              <td>
-                <input class="form-control" id="PPG">
-              </td>                          
-            </tr>
-            </table>
-          </div>
-          <a href="#" onclick="placeBet(PBA, PBCA, PPG)" class="btn btn-primary">Einsetzen</a>
-        </form>
-      </div>
-    </div>    
+    <section>
+        <article>
+            <h4>Gambling Problems</h4>
+            <p>Create Custom ETH Options and bet on future Price developments. For placing a PriceGuess, you need to enter 12 digits. 111100000000 would refer to ethereum Price of 1111.0 USD. The player putting the bet is betting on a price increase, while the taker takes the counter bet. After a bet is placed there is 1 min to take the bet. 2-3 minutes later the bet can be resolved. If a bet is not taken or not resolved, the price pool becomes part of the next betting round.</p>
+        </article>
+    </section>
 
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Was ist der Bet?</h3>
-        <form class="form-inline" role="form">
-          <a href="#" onclick="registerGetInfo()" class="btn btn-primary">Los</a>
-          <div class="form-group">
-            <table>
-              <tr>
-                <td>Info:</td>
-                <td>
-                  <label id="lastInfo">
-                </td>                          
-              </tr>
-            </table>
-          </div>                
-        </form>
-      </div>
+    <!-- <div id="dapp-intro"></div> -->
+    <div id="mm-detected"></div>
+
+    <!-- If I put this into a div bracket, can I then remove the button and replace with address on connect? -->
+    <button id="mm-connect">Connect to MetaMask</button>
+
+    <div id="mm-current-account"></div>
+    
+    <input id="BetAmount-input-box" type="string" placeholder="BetAmount"/>
+    <input id="CounterBetAmount-input-box" type="string" placeholder="CounterBetAmount"/>
+    <input id="PriceGuess-input-box" type="string" placeholder="PriceGuess (12 digits)"/>
+    <button id="ss-input-button">Start</button>
+    <div id="tx-hash"></div>
+
+    <div>
+        <button id="ss-get-value">TakeBet</button>
     </div>
-
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Nimm die Wette an!</h3>
-        <form class="form-inline" role="form">
-          <a href="#" onclick="registerTakeBet()" class="btn btn-primary">Los</a>             
-        </form>
-      </div>
+    <div id="ss-display-value"></div>
+    <div>
+        <button id="ss2-get-value">Current Price</button>
     </div>
-
-    <div class="row">
-      <div>
-        <h3 class="sub-header">Frage nach wer gewonnen hat</h3>
-        <form class="form-inline" role="form">
-          <a href="#" onclick="registerResolveBet()" class="btn btn-primary">Los</a>             
-        </form>
-      </div>
+    <div id="ss2-display-value"></div>
+    <div>
+        <button id="ss3-get-value">PriceGuess/BetAmount/CounterBetAmount</button>
     </div>
+    <div id="ss3-display-value"></div>
+    <div id="ss3_2-display-value"></div>
+    <div id="ss3_3-display-value"></div>
+    <div>
+        <button id="ss4-get-value">ClaimPrice</button>
+    </div>
+    <div id="ss4-display-value"></div>
 
-  </body>
+   
+
+    <hr>
+    </main>
+
+    
+
+    <script src="app.js"></script>
+</body>
 </html>
