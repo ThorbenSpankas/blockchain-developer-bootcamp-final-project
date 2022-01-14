@@ -1,6 +1,8 @@
 const path = require("path");
-var HDWalletProvider = require("truffle-hdwallet-provider");
-var mnemonic = "display miss stone bounce rail double entire erosion hello drift expose boss";
+require('dotenv').config();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const Rinkeby_URL = process.env.Rinkeby_URL;
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -8,7 +10,7 @@ module.exports = {
   networks: {
     rinkeby: {
         provider: function() { 
-         return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/e7511ae4f6514aa78ae45f7b88ce4aaf");
+         return new HDWalletProvider(PRIVATE_KEY, Rinkeby_URL);
         },
         network_id: 4,
         gas: 4500000,
