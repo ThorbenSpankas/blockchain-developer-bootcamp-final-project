@@ -3,6 +3,7 @@ require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const Rinkeby_URL = process.env.Rinkeby_URL;
+var mnemonic = "add phrase here";
 module.exports = {
   // See <http://truffleframework.com/docs/advanced/configuration>
   // to customize your Truffle configuration!
@@ -10,7 +11,7 @@ module.exports = {
   networks: {
     rinkeby: {
         provider: function() { 
-         return new HDWalletProvider(PRIVATE_KEY, Rinkeby_URL);
+         return new HDWalletProvider(mnemonic, "add infura rinkeby link here");
         },
         network_id: 4,
         gas: 4500000,
