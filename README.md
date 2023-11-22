@@ -39,6 +39,3 @@ run `truffle test --network rinkeby`
 
 ## Deployed Address
 https://thorbenspankas.github.io/
-
-## Screencast
-https://drive.google.com/drive/folders/1OGbQrxUsydvVbSWeIYC0EaLViYO3BJRt?usp=sharing
